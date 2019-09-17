@@ -14,6 +14,7 @@ import { ContactPage } from '../pages/contact/contact';
 })
 export class MyApp {
   rootPage = TabsPage;
+  
   @ViewChild(Nav) navChild:Nav;
 
   constructor(
