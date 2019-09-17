@@ -36,7 +36,7 @@ export class MyApp {
 					'/L/about': AboutPage,
 					'/L/contact': ContactPage,
 					'/L/items/:itemId': ItemDetailsPage
-				}).subscribe((match) => {
+				}, { root: false }).subscribe((match) => {
 					console.log('Successfully routed', match);
 				}, (nomatch) => {
 					console.log('Unmatched Route', nomatch);
