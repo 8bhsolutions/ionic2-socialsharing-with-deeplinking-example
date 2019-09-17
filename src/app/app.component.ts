@@ -60,7 +60,7 @@ export class MyApp {
 						message: 'On root page',
 						duration: 3000,
 						showCloseButton: true
-					});
+					}).present();
 				}
 			}
 		});
