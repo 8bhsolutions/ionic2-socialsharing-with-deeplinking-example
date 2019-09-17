@@ -6,3 +6,5 @@ plugins/
 www/
 .tmp
 .idea
+typings
+.vscode
