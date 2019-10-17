@@ -32,12 +32,24 @@ export class MyApp {
 
 				//this is the code who responds to the app deeplinks
 				//Deeplinks if from Ionic Native
-				this.deeplinks.routeWithNavController(this.navChild, {
+				// this.deeplinks.routeWithNavController(this.navChild, {
+				// 	'/L/about': AboutPage,
+				// 	'/L/contact': ContactPage,
+				// 	'/L/items/:itemId': ItemDetailsPage
+				// }, { root: false }).subscribe((match) => {
+				// 	console.log('Successfully routed', match);
+				// }, (nomatch) => {
+				// 	console.log('Unmatched Route', nomatch);
+				// });
+
+				this.deeplinks.route({
 					'/L/about': AboutPage,
 					'/L/contact': ContactPage,
 					'/L/items/:itemId': ItemDetailsPage
-				}, { root: false }).subscribe((match) => {
+				}).subscribe((match) => {
 					console.log('Successfully routed', match);
+					const nav = this.app.getActiveNavs()[0];
+					nav.push(match.$route, match.$args);
 				}, (nomatch) => {
 					console.log('Unmatched Route', nomatch);
 				});
@@ -49,8 +61,8 @@ export class MyApp {
 
 	private overrideBackButton() {
 		this.platform.registerBackButtonAction(() => {
-			let nav = this.app.getActiveNavs()[0];
-			let activeView: any = nav.getActive();
+			const nav = this.app.getActiveNavs()[0];
+			const activeView: any = nav.getActive();
 
 			if (activeView != null) {
 				if (nav.canGoBack()) {
