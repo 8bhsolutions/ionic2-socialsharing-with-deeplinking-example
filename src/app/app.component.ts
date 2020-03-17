@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
+import { Toast as NativeToast, ToastOptions } from '@ionic-native/toast';
 import { App, Nav, Platform, ToastController } from 'ionic-angular';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -22,9 +23,13 @@ export class MyApp {
 		private toast: ToastController,
 		public statusBar: StatusBar,
 		public splashScreen: SplashScreen,
-		public deeplinks: Deeplinks
+		public deeplinks: Deeplinks,
+		private nativeToast: NativeToast,
 	) {
 		platform.ready()
+			.then(() => {
+				this.showToast();
+			})
 			.then(() => {
 				// Okay, so the platform is ready and our plugins are available.
 				// Here you can do any higher level native things you might need.
@@ -56,6 +61,26 @@ export class MyApp {
 			})
 			.then(() => {
 				this.overrideBackButton();
+			});
+	}
+
+	private showToast() {
+		console.log("SHOWING NATIVE TOAST");
+
+		const options: ToastOptions = {
+			message: "hey there",
+			duration: 5000,
+			position: "bottom",
+			// addPixelsY: -40,  // (optional) added a negative value to move it up a bit (default 0)
+			// styling: {
+			// 	opacity: 0.8,
+			// 	backgroundColor: "black",
+			// 	textColor: "white"
+			// }
+		};
+		this.nativeToast.showWithOptions(options)
+			.subscribe((d) => {		// Need to subscribe for this function to work
+				console.log(`NativeToast - Response - ${JSON.stringify(d)}`, d);
 			});
 	}
 

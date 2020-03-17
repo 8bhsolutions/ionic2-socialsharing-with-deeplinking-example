@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Toast as NativeToast, ToastOptions } from '@ionic-native/toast';
 import { NavController } from 'ionic-angular';
 import { ItemDetailsPage } from '../item-details/item-details';
-import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'home-page',
@@ -12,10 +13,12 @@ export class HomePage {
 
   constructor(
     private navCtrl: NavController,
-    public socialSharing: SocialSharing) {
+    public socialSharing: SocialSharing,
+    private nativeToast: NativeToast,
+  ) {
 
     //this code is to build the dummy data of this example
-    for(let i = 1; i < 4; i++) {
+    for (let i = 1; i < 4; i++) {
       this.items.push({
         id: i,
         title: 'Item ' + i,
@@ -23,6 +26,21 @@ export class HomePage {
         img: './assets/imgs/img' + i + '.jpeg'
       });
     }
+  }
+
+  showToast() {
+    console.log("SHOWING NATIVE TOAST");
+
+    const options: ToastOptions = {
+      message: "hey there",
+      duration: 5000,
+      position: "bottom",
+      addPixelsY: -40,  // (optional) added a negative value to move it up a bit (default 0)
+    };
+    this.nativeToast.showWithOptions(options)
+      // .subscribe((d) => {
+      //   console.log(`Response - ${JSON.stringify(d)}`, d);
+      // });
   }
 
   //this method gets called when the user taps on a specific item
@@ -36,12 +54,12 @@ export class HomePage {
     //this code is to use the social sharing plugin
     // message, subject, file, url
     this.socialSharing.share("Check this item:  demoapp://home/items/" + item.id, item.title, item.img)
-    .then(() => {
+      .then(() => {
 
-    })
-    .catch(() => {
+      })
+      .catch(() => {
 
-    });
+      });
   }
 
 }

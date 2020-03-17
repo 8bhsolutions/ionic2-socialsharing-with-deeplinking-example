@@ -11,6 +11,7 @@ import { Deeplinks } from '@ionic-native/deeplinks';
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 import { BrowserModule } from '@angular/platform-browser';
+import { Toast } from '@ionic-native/toast';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { BrowserModule } from '@angular/platform-browser';
     SocialSharing,
     Deeplinks,
     SplashScreen,
-    StatusBar
+    StatusBar,
+    Toast,
   ]
 })
 export class AppModule {}

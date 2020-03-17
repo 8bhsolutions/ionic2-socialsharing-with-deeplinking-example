@@ -5,6 +5,8 @@
 </ion-header>
 
 <ion-content padding>
+  <button ion-button block (click)="showToast()" >Toast</button>
+
   <ion-card *ngFor="let item of items; let i = index">
 
     <img [src]="item.img" (click)="itemTapped(item)"/>
